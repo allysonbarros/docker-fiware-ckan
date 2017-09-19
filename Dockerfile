@@ -36,13 +36,11 @@ RUN ln -s ${APP_DIR}/ckan /usr/bin/ckan
 # https://github.com/conwetlab/ckanext-oauth2/pull/7
 RUN pip install setuptools==19.3
 
-# Install FIWARE specific extensions
-RUN pip install -e git+https://github.com/conwetlab/ckanext-datarequests.git#egg=ckanext-datarequests && \
-    pip install -e git+https://github.com/conwetlab/ckanext-fiware_header.git#egg=ckanext-fiware_header && \
+# Install specific extensions
+RUN pip install -e git+https://github.com/allysonbarros/ckanext-datarequests.git#egg=ckanext-datarequests && \
     pip install -e git+https://github.com/okfn/ckanext-fiwarelabs.git#egg=ckanext-fiwarelabs && \
     pip install -e git+https://github.com/ckan/ckanext-geoview.git#egg=ckanext-geoview && \
     pip install -e git+https://github.com/telefonicaid/ckanext-ngsiview#egg=ckanext-ngsiview && \
-    pip install -e git+https://github.com/conwetlab/ckanext-oauth2#egg=ckanext-oauth2 && \
     pip install -e git+https://github.com/ckan/ckanext-pdfview.git#egg=ckanext-pdfview && \
     pip install -e git+https://github.com/ckan/ckanext-harvest.git#egg=ckanext-harvest && \
     pip install -r ${APP_DIR}/src/ckanext-harvest/pip-requirements.txt && \
