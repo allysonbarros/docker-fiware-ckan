@@ -39,7 +39,7 @@ services:
     build: .
     container_name: ckan-app
     hostname: ckan-app
-    ports:
+    expose:
       - "8000"
     depends_on:
       - postgres
@@ -58,5 +58,5 @@ services:
 
 networks:
   ckan_network:
-    external: true
-      name: actual-name-of-network
+    external:
+      name: ckan_network
