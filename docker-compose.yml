@@ -34,8 +34,8 @@ services:
     ports:
       - "8000"
     depends_on:
-      - postgres:postgres
-      - solr:solr
+      - postgres
+      - solr
     links:
       - postgres:postgres
       - solr:solr
