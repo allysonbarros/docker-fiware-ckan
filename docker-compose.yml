@@ -57,6 +57,6 @@ services:
     env_file: .env
 
 networks:
-    ckan_network:
-      external: true
-        name: actual-name-of-network
+  ckan_network:
+    external: true
+      name: actual-name-of-network
