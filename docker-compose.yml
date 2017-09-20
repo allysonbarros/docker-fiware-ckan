@@ -4,6 +4,8 @@ services:
   data:
     build: data
     hostname: ckan-data
+    networks:
+      - ckan_network
     container_name: ckan-data
 
   postgres:
@@ -11,6 +13,8 @@ services:
     container_name: ckan-postgres
     hostname: ckan-postgres
     env_file: .env
+    networks:
+      - ckan_network
     volumes:
       - ./postgres/create_ckan_database_objects.sh:/docker-entrypoint-initdb.d/create_ckan_database_objects.sh
       - ./postgres/setup_remote_connections.sh:/docker-entrypoint-initdb.d/setup_remote_connections.sh
@@ -19,6 +23,8 @@ services:
     image: solr:5.5
     container_name: ckan-solr
     hostname: ckan-solr
+    networks:
+      - ckan_network
     volumes:
       - ./solr/ckan:/opt/solr/server/solr/ckan
 
@@ -26,6 +32,8 @@ services:
     build: datapusher
     hostname: ckan-datapusher
     container_name: ckan-datapusher
+    networks:
+      - ckan_network
 
   ckan:
     build: .
@@ -40,6 +48,8 @@ services:
       - postgres:ckan-postgres
       - solr:ckan-solr
       - datapusher:ckan-datapusher
+    networks:
+      - ckan_network
     volumes_from:
       - data
     volumes:
