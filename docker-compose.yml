@@ -3,13 +3,13 @@ version: '2'
 services:
   data:
     build: data
-    hostname: data
-    container_name: data
+    hostname: ckan-data
+    container_name: ckan-data
 
   postgres:
     image: postgres:latest
-    container_name: postgres
-    hostname: postgres
+    container_name: ckan-postgres
+    hostname: ckan-postgres
     env_file: .env
     volumes:
       - ./postgres/create_ckan_database_objects.sh:/docker-entrypoint-initdb.d/create_ckan_database_objects.sh
@@ -17,29 +17,29 @@ services:
 
   solr:
     image: solr:5.5
-    container_name: solr
-    hostname: solr
+    container_name: ckan-solr
+    hostname: ckan-solr
     volumes:
       - ./solr/ckan:/opt/solr/server/solr/ckan
 
   datapusher:
     build: datapusher
-    hostname: datapusher
-    container_name: datapusher
+    hostname: ckan-datapusher
+    container_name: ckan-datapusher
 
   ckan:
     build: .
-    container_name: ckan
-    hostname: ckan
+    container_name: ckan-app
+    hostname: ckan-app
     ports:
       - "8000"
     depends_on:
       - postgres
       - solr
     links:
-      - postgres:postgres
-      - solr:solr
-      - datapusher:datapusher
+      - ckan-postgres:ckan-postgres
+      - ckan-solr:ckan-solr
+      - ckan-datapusher:ckan-datapusher
     volumes_from:
       - data
     volumes:
