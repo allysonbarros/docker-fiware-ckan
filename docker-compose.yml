@@ -58,4 +58,5 @@ services:
 
 networks:
     ckan_network:
-      driver: default
+      external: true
+        name: actual-name-of-network
