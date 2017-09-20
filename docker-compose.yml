@@ -37,9 +37,9 @@ services:
       - postgres
       - solr
     links:
-      - ckan-postgres:ckan-postgres
-      - ckan-solr:ckan-solr
-      - ckan-datapusher:ckan-datapusher
+      - postgres:ckan-postgres
+      - solr:ckan-solr
+      - datapusher:ckan-datapusher
     volumes_from:
       - data
     volumes:
