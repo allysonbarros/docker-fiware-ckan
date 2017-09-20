@@ -1,36 +1,47 @@
-data:
-  build: data
-  hostname: data
+version: '2'
 
-postgres:
-  image: postgres:latest
-  hostname: postgres
-  env_file: .env
-  volumes:
-    - ./postgres/create_ckan_database_objects.sh:/docker-entrypoint-initdb.d/create_ckan_database_objects.sh
-    - ./postgres/setup_remote_connections.sh:/docker-entrypoint-initdb.d/setup_remote_connections.sh
+services:
+  data:
+    build: data
+    hostname: data
+    container_name: data
 
-solr:
-  image: solr:5.5
-  hostname: solr
-  volumes:
-    - ./solr/ckan:/opt/solr/server/solr/ckan
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    hostname: postgres
+    env_file: .env
+    volumes:
+      - ./postgres/create_ckan_database_objects.sh:/docker-entrypoint-initdb.d/create_ckan_database_objects.sh
+      - ./postgres/setup_remote_connections.sh:/docker-entrypoint-initdb.d/setup_remote_connections.sh
 
-datapusher:
-  build: datapusher
-  hostname: datapusher
+  solr:
+    image: solr:5.5
+    container_name: solr
+    hostname: solr
+    volumes:
+      - ./solr/ckan:/opt/solr/server/solr/ckan
 
-ckan:
-  build: .
-  hostname: ckan
-  ports:
-    - "8000:8000"
-  links:
-    - postgres:postgres
-    - solr:solr
-    - datapusher:datapusher
-  volumes_from:
-    - data
-  volumes:
-    - ./setup/production.ini:/srv/app/production.ini
-  env_file: .env
+  datapusher:
+    build: datapusher
+    hostname: datapusher
+    container_name: datapusher
+
+  ckan:
+    build: .
+    container_name: ckan
+    hostname: ckan
+    ports:
+      - "8000"
+    depends_on:
+      - postgres:postgres
+      - solr:solr
+    links:
+      - postgres:postgres
+      - solr:solr
+      - datapusher:datapusher
+    volumes_from:
+      - data
+    volumes:
+      - ./setup/production.ini:/srv/app/production.ini
+    env_file: .env
