@@ -75,7 +75,3 @@ services:
       - traefik.frontend.rule=Host:ckan.opendataprocessor.com
       - traefik.docker.network=proxy
       - traefik.port=8000
-
-networks:
-  ckan_network:
-    external: true
