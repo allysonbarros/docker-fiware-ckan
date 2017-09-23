@@ -37,7 +37,7 @@ RUN ln -s ${APP_DIR}/ckan /usr/bin/ckan
 RUN pip install setuptools==19.3
 
 # Install specific extensions
-RUN pip install -e git+https://github.com/conwetlab/ckanext-datarequests.git@develop#egg=ckanext-datarequests && \
+RUN pip install -e git+https://github.com/conwetlab/ckanext-datarequests.git#egg=ckanext-datarequests && \
     pip install -e git+https://github.com/okfn/ckanext-fiwarelabs.git#egg=ckanext-fiwarelabs && \
     pip install -e git+https://github.com/ckan/ckanext-geoview.git#egg=ckanext-geoview && \
     pip install -e git+https://github.com/telefonicaid/ckanext-ngsiview#egg=ckanext-ngsiview && \
