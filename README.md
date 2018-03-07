@@ -1,6 +1,6 @@
 # Docker files for OpenData Processor flavoured CKAN
 
-[![Docker hub](https://img.shields.io/docker/pulls/fiware/ckan.svg)](https://hub.docker.com/r/fiware/ckan/)
+[![Docker hub](https://img.shields.io/docker/pulls/opendataprocessor/ckan.svg)](https://hub.docker.com/r/opendataprocessor/ckan/)
 
 [CKAN](https://github.com/ckan/ckan) is a powerful Data Management system used
 to power Open Data catalogues across the world, including many national
