@@ -30,19 +30,10 @@ WORKDIR ${APP_DIR}
 # Add ckan command
 RUN ln -s ${APP_DIR}/ckan /usr/bin/ckan
 
-# We need setuptools<19.4, otherwise ckanext-oauth2 can not be installed because of
-# https://bitbucket.org/pypa/setuptools/issues/491/setuptools-194-breaks-pip-install-builds
-# This can be removed once this is merged:
-# https://github.com/conwetlab/ckanext-oauth2/pull/7
-RUN pip install setuptools==19.3
-
-# Install specific extensions
-RUN pip install -e git+https://github.com/conwetlab/ckanext-datarequests.git#egg=ckanext-datarequests && \
-    pip install -e git+https://github.com/okfn/ckanext-fiwarelabs.git#egg=ckanext-fiwarelabs && \
+# Install OpenData Processor specific extensions
+RUN pip install -e git+https://github.com/allysonbarros/ckanext-opendataprocessor_theme#egg=ckanext-opendataprocessor_theme && \
     pip install -e git+https://github.com/ckan/ckanext-geoview.git#egg=ckanext-geoview && \
     pip install -e git+https://github.com/telefonicaid/ckanext-ngsiview#egg=ckanext-ngsiview && \
     pip install -e git+https://github.com/ckan/ckanext-pdfview.git#egg=ckanext-pdfview && \
     pip install -e git+https://github.com/ckan/ckanext-harvest.git#egg=ckanext-harvest && \
-    pip install -r ${APP_DIR}/src/ckanext-harvest/pip-requirements.txt && \
-    pip install -e git+https://github.com/conwetlab/ckanext-privatedatasets.git#egg=ckanext-privatedatasets && \
-    pip install -e git+https://github.com/conwetlab/ckanext-storepublisher.git#egg=ckanext-storepublisher
+    pip install -r ${APP_DIR}/src/ckanext-harvest/pip-requirements.txt
