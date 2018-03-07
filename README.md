@@ -1,4 +1,4 @@
-# Docker files for FIWARE Labs flavoured CKAN
+# Docker files for OpenData Processor flavoured CKAN
 
 [![Docker hub](https://img.shields.io/docker/pulls/fiware/ckan.svg)](https://hub.docker.com/r/fiware/ckan/)
 
@@ -32,14 +32,7 @@ repository and run:
 docker-compose up -d
 ```
 
-After a few minutes you will be able to access the CKAN site at http://localhost:8000
-
-![CKAN FIWARE](http://i.imgur.com/saUqbcp.png)
-
-**NOTE:** the `oauth2` authorization extension is not enabled by default as it
-requires further configuration. Edit the relevant settings on `setup/production.ini`.
-You may need to set the `OAUTHLIB_INSECURE_TRANSPORT` env var if not serving CKAN under https,
-check the [documentation](https://github.com/conwetlab/ckanext-oauth2/wiki/Activating-and-Installing) for details.
+After a few minutes you will be able to access the CKAN site at http://localhost:9090
 
 ### Customizing the image
 
@@ -60,14 +53,14 @@ If you want to set up the Postgres and Solr servers separately you can run the
 image directly with the following command:
 
 ```
-docker run -p 8000:8000 -e CKAN_SQLALCHEMY_URL=postgresql://ckan_default:pass@localhost/ckan_default -e CKAN_SOLR_URL=http://localhost:8983 -e CKAN_SITE_URL=http://localhost:8000 fiware/ckan
+docker run -p 9090:8000 -e CKAN_SQLALCHEMY_URL=postgresql://ckan_default:pass@localhost/ckan_default -e CKAN_SOLR_URL=http://localhost:8983 -e CKAN_SITE_URL=http://localhost:8000 opendataprocessor/ckan
 ```
 
 You might want to use a `.env` file to define all your environment variables and pass that
 as a parameter:
 
 ```
-docker run -p 8000:8000 --env-file=.env fiware/ckan
+docker run -p 9090:8000 --env-file=.env opendataprocessor/ckan
 ```
 
 
